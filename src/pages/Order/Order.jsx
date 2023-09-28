@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Alert, Button, Container, Typography } from '@mui/material';
 
 import { OrderItem } from './components/OrderItem';
@@ -18,6 +19,7 @@ const orderToArray = order => Object.keys(order)
 const Order = () => {
     const { error: checkoutError, posting, dispatchPost } = usePost();
     const { order } = useOrder();
+    const [orderSuccess, setOrderSuccess] = useState({ success: false, id: null});
     const orderArray = orderToArray(order);
 
     const post = () => dispatchPost(
@@ -26,7 +28,7 @@ const Order = () => {
             products: orderArray.map(item => ({ id: Number(item.id), quantity: item.count})),
         },
         // TODO: Clear order and navigate to a success page displaying order ID
-        (r) => console.log('success', r),
+        (r) => setOrderSuccess({ success: true, id: r.data.id }),
     );
 
     const checkoutDisabled = orderArray.length < 1 || posting; 
@@ -48,6 +50,7 @@ const Order = () => {
             </StyledContainer>
             <StyledContainer>
                 {checkoutError && <Alert severity="error">There was an error completing your purchase. Please try again.</Alert>}
+                {orderSuccess.success && <Alert severity="success">Your order has been created! Order ID: {orderSuccess.id}</Alert>}
                 <Button disabled={checkoutDisabled} onClick={post}>Checkout</Button>
             </StyledContainer>
 

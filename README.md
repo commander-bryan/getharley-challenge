@@ -27,13 +27,13 @@ Further work:
 
 Can be seen at /checkout and accessed using the checkout button on the navbar.
 
-Displays a summary of the users basket and a control that will dispatch a post request to the API. If there are errors, the user will see an alert and can resubmit.
+Displays a summary of the users basket and a control that will dispatch a post request to the API. If there are errors, the user will see an alert and can resubmit. if successful, order id will be displayed
 
 Further work:
 
 - Restyle basket summary to look nicer
 - Allow the user to update quantities from this view 
-- Navigate to a confirmation screen when the post is successful, and clear the current basket
+- Navigate to a proper confirmation screen when the post is successful, and clear the current basket
 
 ### General further work
 
